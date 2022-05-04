@@ -5,13 +5,16 @@ services:
     image: hashicorp/vault:1.9.6
     restart: always
     ports:
-      - "8100:8200"
+      - "8200:8200"
     volumes:
       - ./helpers:/helpers
     environment:
       VAULT_ADDR: "http://vault:8200"
     container_name: vault-agent
     entrypoint: "vault agent -log-level debug -config=/helpers/vault-agent.hcl"
+    depends_on:
+      vault:
+        condition: service_healthy
   vault:
     image: hashicorp/vault:1.9.6
     restart: always
@@ -20,7 +23,7 @@ services:
       - /vault/data
       - /etc/vault/logs
     ports:
-      - "8200:8200/tcp"
+      - "8201:8200/tcp"
     environment:
       VAULT_ADDR: http://localhost:8200
       VAULT_TOKEN: root
@@ -30,3 +33,9 @@ services:
       - IPC_LOCK
     container_name: vault
     entrypoint: "vault server -dev"
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:8200 || exit 1
+      interval: 10s
+      retries: 12
+      start_period: 10s
+      timeout: 10s
