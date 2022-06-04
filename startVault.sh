@@ -1,4 +1,3 @@
-echo "$@"
 WAIT_FOR_TIMEOUT=120 # 2 minutes
 docker-compose up --detach
 echo Waiting for Vault Agent container to be up

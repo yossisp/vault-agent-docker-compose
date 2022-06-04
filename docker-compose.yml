@@ -20,7 +20,7 @@ services:
     restart: always
     volumes:
       - ./helpers:/helpers
-      - vault-data:/vault/file
+      - vault_data:/vault/file
     ports:
       - "8201:8200/tcp"
     # environment:
@@ -40,4 +40,4 @@ services:
       timeout: 10s
 
 volumes:
-  vault-data: {}
+  vault_data: {}
