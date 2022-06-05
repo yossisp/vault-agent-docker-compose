@@ -14,5 +14,5 @@ Vault ui is available at `http://localhost:8201/ui`. In order to log into the ui
 
 - `curl http://localhost:8200/v1/kv/data/hello`
 
-### How To Remove Volume
+### How To Remove Vault Data
 Run `source delete-vault-volume.sh`.
