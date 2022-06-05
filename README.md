@@ -1,6 +1,6 @@
 ### About
 
-This is a minimal setup to get Vault server and Vault Agent running on docker-compose. Vault server uses file storage backend which makes this a persistent setup (a docker volume is mounted), so that tokens data will persist after running machine restart or `docker-compose down`.
+This is a minimal setup to get Vault server and Vault Agent running on docker-compose (it is in no way a production setup, it's intended for local development). Vault server uses file storage backend which makes this a persistent setup (a docker volume is mounted), so that tokens data will persist after running machine restart or `docker-compose down`.
 
 ### How To Run
 
