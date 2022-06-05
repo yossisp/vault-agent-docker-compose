@@ -1,5 +1,6 @@
 apk add jq curl
 
+export VAULT_ADDR=http://localhost:8200
 root_token=$(cat /helpers/keys.json | jq -r '.root_token')
 
 unseal_vault() {
@@ -9,7 +10,6 @@ unseal_vault() {
   vault login token=$VAULT_TOKEN
 }
 
-export VAULT_ADDR=http://localhost:8200
 if [[ -n "$root_token" ]]
   then
       echo "Vault already initialized"
