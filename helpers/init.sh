@@ -5,7 +5,6 @@ root_token=$(cat /helpers/keys.json | jq -r '.root_token')
 
 unseal_vault() {
   export VAULT_TOKEN=$root_token
-  echo VAULT_TOKEN=$VAULT_TOKEN
   vault operator unseal -address=${VAULT_ADDR} $(cat /helpers/keys.json | jq -r '.keys[0]')
   vault login token=$VAULT_TOKEN
 }
@@ -30,3 +29,5 @@ if [[ -n "$root_token" ]]
       vault write -format=json -f auth/approle/role/dev-role/secret-id \
         | jq -r '.data.secret_id' > /helpers/secret_id
 fi
+
+printf "\n\nVAULT_TOKEN=%s\n\n" $VAULT_TOKEN
